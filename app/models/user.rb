@@ -21,6 +21,11 @@ class User < ApplicationRecord
    # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings,through: :relationships, source: :followed
 
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  
+  has_many :view_counts, dependent: :destroy
+  
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
